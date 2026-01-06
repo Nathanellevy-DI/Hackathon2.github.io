@@ -34,7 +34,7 @@ hackathon2/
 │   ├── package.json
 │   └── index.html
 │
-├── server/                    # Express Backend
+├── server/                    # Node Js & Express & some sql lite Backend
 │   ├── routes/
 │   │   ├── workouts.js
 │   │   └── goals.js
