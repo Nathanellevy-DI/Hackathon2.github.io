@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { goalOperations } = require('../models/database');
+const { validateBody } = require('../middleware/validation');
+const { goalSchema, goalUpdateSchema } = require('../schemas/goalSchema');
 
 // GET /api/goals - Get all goals
 router.get('/', (req, res) => {
@@ -28,7 +30,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/goals - Create new goal
-router.post('/', (req, res) => {
+router.post('/', validateBody(goalSchema), (req, res) => {
     try {
         const { title, targetValue, unit, deadline } = req.body;
 
@@ -51,7 +53,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT /api/goals/:id - Update goal
-router.put('/:id', (req, res) => {
+router.put('/:id', validateBody(goalUpdateSchema), (req, res) => {
     try {
         const { currentValue, completed, title } = req.body;
 

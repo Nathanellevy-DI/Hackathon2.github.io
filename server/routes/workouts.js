@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { workoutOperations } = require('../models/database');
+const { validateBody } = require('../middleware/validation');
+const { workoutSchema } = require('../schemas/workoutSchema');
 
 // GET /api/workouts - Get all workouts
 router.get('/', (req, res) => {
@@ -28,7 +30,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/workouts - Create new workout
-router.post('/', (req, res) => {
+router.post('/', validateBody(workoutSchema), (req, res) => {
     try {
         const { exerciseName, category, sets, reps, weight, duration, notes } = req.body;
 
